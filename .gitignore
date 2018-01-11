@@ -1,22 +1,63 @@
-# Compiled class file
-*.class
+import java.util.Scanner;
 
-# Log file
-*.log
+public class connect4 {
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		String[][] board = new String[8][8];			 // R C || Y X
+		int[] height = {7, 7, 7, 7, 7, 7, 7, 7};
 
-# BlueJ files
-*.ctxt
+		for (int row = 0; row < 8; row++) {			 // Creates empty
+			for (int col = 0; col < 8; col++) {			 // 8x8 board
+				board[col][row] = "  ";
+			}
+		}
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+		int turn = 0, winner = 0;			 // 0 = playing, 1 = X win, 2 = O win, 3 = draw
+		while (winner == 0) {
+			displayBoard(board);
+			if (turn % 2 == 0)
+				System.out.println("X: YOUR TURN");
+			else
+				System.out.println("O: YOUR TURN");
+			System.out.println("Input a number (1-8)");
+			int column = scan.nextInt() - 1;
+			if(column < 0 || column > 8)
+				System.out.println("OUT OF BOUNDS");
+			if (turn % 2 == 0)
+				board[column][height[column]] = "X";
+			else
+				board[column][height[column]] = "O";
+			height[column]--;
+			winner = checkWinner(board);
+			if (turn == 64)
+				winner = 3;
+			turn++;
+		}
+	}
 
-# Package Files #
-*.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.rar
+	public static void displayBoard(String[][] board) {
+		for (int row = 0; row < board.length; row++) {
+			System.out.print("|");
+			for (int col = 0; col < board[0].length; col++) {
+				System.out.print("" + board[col][row] + "|");
+			}
+			System.out.println();
+		}
+	}
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+	public static int checkWinner(String[][] board) {
+		for (int i = 0; i < board[0].length; i++) {
+
+		}
+		return 0;
+	}
+	
+	public boolean placePiece(String[][] board, int location) {
+		return false;
+	}
+
+	public void printBoard(String[][] board) {
+
+	}
+
+}
